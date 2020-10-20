@@ -8,7 +8,6 @@ public class Main {
         String a = sac.nextLine();
         String[] allNumbers = a.split("\\+|\\*|-|/|' '");
         String d="";
-        int sum=0;
         for (String letter:a.split("")){
             switch (letter){
                 case "*":
@@ -34,36 +33,42 @@ public class Main {
         }
        for (int i=0;i<deystv.size();i++){
            String q=deystv.get(i);
-           if (q.equals("*")){
-               int u=fc.get(i)*fc.get(i+1);
-               fc.remove(i);
-               deystv.remove(i);
-               fc.set(i, u);
+           int u;
+           if (q.equals("*")||q.equals("/")){
+               switch (q){
+                   case "*":
+                       u=fc.get(i)*fc.get(i+1);
+                       fc.remove(i);
+                       fc.set(i,u);
+                       deystv.remove(i);
+                       break;
+                   case "/":
+                       u=fc.get(i)/fc.get(i+1);
+                       fc.remove(i);
+                       fc.set(i,u);
+                       deystv.remove(i);
+               }
            }
        }
-
         for (int i=0;i<deystv.size();i++){
             String q=deystv.get(i);
-            if (q.equals("/")){
-                int u=fc.get(i)/fc.get(i+1);
-                fc.remove(i);
-                deystv.remove(i);
-                fc.set(i, u);
+            int u;
+            if (q.equals("+")||q.equals("-")){
+                switch (q){
+                    case "-":
+                        u=fc.get(i)-fc.get(i+1);
+                        fc.remove(i);
+                        fc.set(i,u);
+                        deystv.remove(i);
+                        break;
+                    case "+":
+                        u=fc.get(i)+fc.get(i+1);
+                        fc.remove(i);
+                        fc.set(i,u);
+                        deystv.remove(i);
+                }
             }
         }
-        for (int i=0;i<deystv.size();i++){
-            String q=deystv.get(i);
-            if (q.equals("-")){
-                int u=fc.get(i)-fc.get(i+1);
-                fc.remove(i);
-                deystv.remove(i);
-                fc.set(i, u);
-            }
-        }
-        for (int ui : fc){
-            sum+=ui;
-
-        }
-        System.out.println(sum);
+        System.out.println(fc.get(0));
     }
 }
